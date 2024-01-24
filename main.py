@@ -115,13 +115,41 @@ def creature_stek(num):  # num длина стека
 
     value -= 1
 
-  print(f"Сумма 2 и 3 чисел {counting}")  # Вывод данных
-
   for item in range(len(shadow_stek)):  # Обратно заполнение исходного стека
     stek.append(shadow_stek.pop())
   stek.append(counting)
   print(f'Конечный выход {stek}')  # Вывод данных
 
+
+# 1. Дана очередь целых чисел. Удалить все локальные минимумы, при этом первый и последний элементы не обрабатывать.
+
+def local_minimum(length):
+  queue = [random.randint(1, 15) for item in range(length)]  # Заполнение списка
+  dell = []  # Вспомогательный список
+  shadow_queue = queue.copy()
+  shadow_queue = shadow_queue[1:-1]  # Обрез 1 и последнего элементов
+  print(f"Исходный список {queue}")
+
+  for item in range(len(shadow_queue)):  # Проход по скопированному списку
+    try:  # Проверка, если выход за границы списка
+      if shadow_queue[item - 1] > shadow_queue[item] < shadow_queue[item + 1]:
+        dell.append(item+1)
+
+    except IndexError:
+      try:  # Тогда проверяется соседний, а не соседние элементы
+        if shadow_queue[item] < shadow_queue[item + 1]:
+          dell.append(item+1)
+
+      except IndexError:  # Аналогично прошлой проверке
+        if shadow_queue[item] < shadow_queue[item - 1]:
+          dell.append(item+1)
+
+  check = 0
+  for item in dell:  # Перезаполнение исходного списка
+    queue.pop(item - check)
+    check += 1
+
+  print(f'Выходной список {queue}')
 
 if __name__ == '__main__':
   # №1
@@ -173,3 +201,7 @@ if __name__ == '__main__':
   # №4
   print('\t')
   creature_stek(10)
+
+  # №5
+  print('\t')
+  local_minimum(10)
