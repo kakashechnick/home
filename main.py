@@ -151,6 +151,22 @@ def local_minimum(length):
 
   print(f'Выходной список {queue}')
 
+
+# Множества8. Составить программу подсчета количества цифр в заданной строке и распечатать их.
+
+def numbers(num):
+  nums = '1234567890'  # Данные для сравнения
+  value = 0  # Счетчик
+
+  print(f'Строка: {num}')
+
+  for item in num:  # Проход по каждому из элементов
+    if any([item in iterator for iterator in nums]):  # Проверка на содержимое в строке
+      counter = {f'Кол-во цифр в строке': value}
+      value += 1  # Обновление счетчика
+
+  print(counter)
+
 if __name__ == '__main__':
   # №1
   print(positive_number_between_negative(10), '\n')
@@ -205,3 +221,7 @@ if __name__ == '__main__':
   # №5
   print('\t')
   local_minimum(10)
+
+  # №6
+  print('\t')
+  numbers('12;lp23l2')
