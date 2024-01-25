@@ -1,5 +1,5 @@
 # Шейкерная сортировка
-def sort(arr):
+def sortShake(arr):
   right = len(arr) - 1  # Правый флаг (Ограничитель)
   left = 0  # Левый флаг (Ограничитель)
   logical_variable = True  # Проверка на вход
@@ -29,5 +29,49 @@ def sort(arr):
     print(arr)
 
 
+# Пирамидальная сортировка
+def heapify(arr, n, i):
+    largest = i  # Initialize largest as root
+    left = 2 * i + 1   # left = 2*i + 1
+    right = 2 * i + 2   # right = 2*i + 2
+
+  # Проверяем существует ли левый дочерний элемент больший, чем корень
+
+    if left < n and arr[i] < arr[left]:
+        largest = left
+
+    # Проверяем существует ли правый дочерний элемент больший, чем корень
+
+    if right < n and arr[largest] < arr[right]:
+        largest = right
+
+    # Заменяем корень, если нужно
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]  # свап
+
+        # Применяем heapify к корню.
+        heapify(arr, n, largest)
+
+# Основная функция для сортировки массива заданного размера
+
+
+def heapSort(arr):
+  num = len(arr)
+
+  # Построение max-heap.
+  for item in range(num, -1, -1):
+      heapify(arr, num, item)
+
+  # Один за другим извлекаем элементы
+  for item in range(num-1, 0, -1):
+      arr[item], arr[0] = arr[0], arr[item]  # свап
+      heapify(arr, item, 0)
+      print(arr)
+
+
 if __name__ == '__main__':
-  sort([3, 10, 7, 5, 1, 4, 9, 6, 8, 2])
+  sortShake([3, 10, 7, 5, 1, 4, 9, 6, 8, 2])
+  print()
+  arr = [3, 10, 7, 5, 1, 4, 9, 6, 8, 2]
+  heapSort(arr)
+
